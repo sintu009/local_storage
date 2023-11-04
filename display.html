@@ -1,0 +1,55 @@
+<!-- display.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data</title>
+    <style>
+        .card {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="dataInput" placeholder="Enter data">
+        <button onclick="storeData()">Submit</button>
+    </div>
+    <div class="card">
+        <h2>Stored Data</h2>
+        <p id="userData"></p>
+    </div>
+
+    <script>
+        function storeData() {
+            const inputData = document.getElementById('dataInput').value;
+            if (typeof (Storage) !== "undefined") {
+                localStorage.setItem('userData', inputData);
+                window.location.href = 'display.html';
+            } else {
+                alert('Local storage is not supported in your browser.');
+            }
+        }
+
+        const storedData = localStorage.getItem('userData');
+        const userDataElement = document.getElementById('userData');
+
+        if (storedData) {
+            userDataElement.textContent = storedData;
+        } else {
+            userDataElement.textContent = 'No data available.';
+        }
+
+    </script>
+</body>
+
+</html>
